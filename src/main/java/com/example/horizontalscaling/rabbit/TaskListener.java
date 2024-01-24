@@ -1,5 +1,6 @@
 package com.example.horizontalscaling.rabbit;
 
+import com.example.horizontalscaling.domains.Task;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -26,7 +27,7 @@ public class TaskListener {
                     exchange = @Exchange(value = TASK_EXCHANGE)
             )
     )
-    public void handleTask(String payload) {
+    public void handleTask(Task task) {
 
     }
 }

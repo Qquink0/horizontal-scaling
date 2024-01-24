@@ -1,5 +1,6 @@
 package com.example.horizontalscaling.rabbit;
 
+import com.example.horizontalscaling.domains.Task;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -17,10 +18,10 @@ public class TaskSender {
     RabbitMessagingTemplate rabbitMessagingTemplate;
 
     // Отправка задачи
-    public void sentTask(String payload) {
+    public void sentTask(Task task) {
 
         rabbitMessagingTemplate
-                .convertAndSend(payload);
+                .convertAndSend(TaskListener.TASK_EXCHANGE, task);
 
     }
 }
