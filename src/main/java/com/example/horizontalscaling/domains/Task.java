@@ -14,6 +14,6 @@ public class Task implements Serializable {
 
     String id;
 
-    String fromServer;
+    Integer fromServerPort;
 
 }
