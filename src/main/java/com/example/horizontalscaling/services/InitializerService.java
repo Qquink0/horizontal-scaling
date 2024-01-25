@@ -19,7 +19,7 @@ import java.util.UUID;
 @Service
 public class InitializerService {
 
-    private static final String SERVER_ID = UUID.randomUUID().toString();
+    public static final String SERVICE_ID = UUID.randomUUID().toString();
 
     RedisLock redisLock;
 
@@ -34,18 +34,18 @@ public class InitializerService {
         if (redisLock.acquireLock(ONE_MINUTE_IN_MILLIS, GENERATE_TASK_KEY)) {
 
             log.info(Strings.repeat("-", 100));
-            log.info(String.format("Server \"%s\" start generate tasks", SERVER_ID));
+            log.info(String.format("Service \"%s\" start generate tasks", SERVICE_ID));
 
-            for (int i = 0; i < 100; i++) {
+            for (int i = 0; i < 5; i++) {
                 taskSender.sentTask(
                         Task.builder()
                                 .id(UUID.randomUUID().toString())
-                                .fromServer(SERVER_ID)
+                                .fromServer(SERVICE_ID)
                                 .build()
                 );
             }
 
-            log.info(String.format("Server \"%s\" start generate tasks", SERVER_ID));
+            log.info(String.format("Service \"%s\" start generate tasks", SERVICE_ID));
             log.info(Strings.repeat("-", 100));
 
             redisLock.releaseLock(GENERATE_TASK_KEY);

@@ -1,6 +1,7 @@
 package com.example.horizontalscaling.rabbit;
 
 import com.example.horizontalscaling.domains.Task;
+import com.example.horizontalscaling.services.InitializerService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -33,6 +34,19 @@ public class TaskListener {
             )
     )
     public void handleTask(Task task) {
+
+        System.out.println("Received message: " + task.toString());
+
+        Thread.sleep(1000);
+
+        log.info(
+                String.format(
+                        "Service \"%s\" end process task \"%s\" from service \"%s\"",
+                        InitializerService.SERVICE_ID,
+                        task.getId(),
+                        task.getFromServer()
+                        )
+        );
 
         log.info(mapper.writeValueAsString(task));
 
