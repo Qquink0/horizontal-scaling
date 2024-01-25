@@ -28,7 +28,7 @@ public class InitializerService {
     private static final long ONE_MINUTE_IN_MILLIS = 1000 * 60;
     private static final String GENERATE_TASK_KEY = "horizontal:scaling:generate:tasks";
 
-    @Scheduled(fixedDelay = 1000L)
+    @Scheduled(fixedDelay = 8000)
     public void generateTask() {
 
         if (redisLock.acquireLock(ONE_MINUTE_IN_MILLIS, GENERATE_TASK_KEY)) {
@@ -45,7 +45,7 @@ public class InitializerService {
                 );
             }
 
-            log.info(String.format("Service \"%s\" start generate tasks", SERVICE_ID));
+            log.info(String.format("Service \"%s\" end generate tasks", SERVICE_ID));
             log.info(Strings.repeat("-", 100));
 
             redisLock.releaseLock(GENERATE_TASK_KEY);

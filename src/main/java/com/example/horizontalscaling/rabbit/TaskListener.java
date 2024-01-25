@@ -35,7 +35,7 @@ public class TaskListener {
     )
     public void handleTask(Task task) {
 
-        System.out.println("Received message: " + task.toString());
+//        System.out.println("Received message: " + task.toString());
 
         Thread.sleep(1000);
 
