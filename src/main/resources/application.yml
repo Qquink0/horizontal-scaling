@@ -3,8 +3,8 @@
   spring:
     rabbitmq:
       host: localhost
-      username: guest
-      password: quest
+      username: test
+      password: test
     data:
       redis:
         host: localhost

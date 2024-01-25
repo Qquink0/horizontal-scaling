@@ -1,8 +1,10 @@
 package com.example.horizontalscaling.rabbit;
 
 import com.example.horizontalscaling.domains.Task;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.amqp.rabbit.annotation.Exchange;
@@ -17,10 +19,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class TaskListener {
 
+    ObjectMapper mapper = new ObjectMapper();
+
     public static final String TASK_QUEUE = "task.queue";
     public static final String TASK_EXCHANGE = "task.exchange";
 
     // Прием задачи
+    @SneakyThrows
     @RabbitListener(
             bindings = @QueueBinding(
                     value = @Queue(value = TASK_QUEUE),
@@ -28,6 +33,8 @@ public class TaskListener {
             )
     )
     public void handleTask(Task task) {
+
+        log.info(mapper.writeValueAsString(task));
 
     }
 }
