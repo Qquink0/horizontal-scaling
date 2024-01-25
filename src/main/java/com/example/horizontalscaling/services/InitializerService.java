@@ -19,7 +19,7 @@ import java.util.UUID;
 @Service
 public class InitializerService {
 
-    public static final String SERVICE_ID = UUID.randomUUID().toString();
+    public static final String SERVICE_ID = generateShortId();
 
     RedisLock redisLock;
 
@@ -39,7 +39,7 @@ public class InitializerService {
             for (int i = 0; i < 5; i++) {
                 taskSender.sentTask(
                         Task.builder()
-                                .id(UUID.randomUUID().toString())
+                                .id(generateShortId())
                                 .fromServer(SERVICE_ID)
                                 .build()
                 );
@@ -50,6 +50,8 @@ public class InitializerService {
 
             redisLock.releaseLock(GENERATE_TASK_KEY);
         }
-
+    }
+    private static String generateShortId() {
+        return UUID.randomUUID().toString().substring(0, 4);
     }
 }

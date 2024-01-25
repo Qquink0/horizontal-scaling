@@ -37,7 +37,7 @@ public class TaskListener {
 
 //        System.out.println("Received message: " + task.toString());
 
-        Thread.sleep(1000);
+        Thread.sleep(15_000);
 
         log.info(
                 String.format(
@@ -47,8 +47,5 @@ public class TaskListener {
                         task.getFromServer()
                         )
         );
-
-        log.info(mapper.writeValueAsString(task));
-
     }
 }
