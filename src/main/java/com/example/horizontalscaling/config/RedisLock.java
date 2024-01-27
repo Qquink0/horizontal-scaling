@@ -25,7 +25,7 @@ public class RedisLock {
      *
      * @param expireMillis - время, на которое данная задача будет заблокирована в мс
      * @param taskKey      - ключ, по которому будет заблокирована задача
-     * @return статус захвата (захвачено / не захвачено
+     * @return статус захвата (захвачено / не захвачено)
      */
     public boolean acquireLock(long expireMillis, String taskKey) {
 
